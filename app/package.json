@@ -1,0 +1,46 @@
+{
+    "name": "poddycast-mini",
+    "version": "1.0.0",
+    "description": "Mini, standalone version of the Poddycast Podcast player",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "package:all": "electron-packager ./ --out=./builds --overwrite --platform=all --icon=img/poddycast-app_icon",
+        "package:linux": "electron-packager ./ --out=./builds --overwrite --platform=linux --icon=img/poddycast-app_icon",
+        "package:macappstore": "electron-packager ./ --out=./builds --overwrite --platform=mas --icon=img/poddycast-app_icon",
+        "package:osx": "electron-packager ./ --out=./builds --overwrite --platform=darwin --icon=img/poddycast-app_icon",
+        "package:win": "electron-packager ./ --out=./builds --overwrite --platform=win32 --icon=img/poddycast-app_icon",
+        "start": "electron ."
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.5.4",
+        "bootstrap": "^5.0.0-beta1",
+        "electron": "^11.0.4"
+    },
+    "devDependencies": {
+        "electron-packager": "^15.2.0",
+        "eslint": "^7.15.0",
+        "eslint-config-standard": "^16.0.2",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-vue": "^7.2.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MrChuckomo/poddycast-mini.git"
+    },
+    "keywords": [
+        "podcast",
+        "mini",
+        "player",
+        "itunes",
+        "audio"
+    ],
+    "author": "Alexander Kettler",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/MrChuckomo/poddycast-mini/issues"
+    },
+    "homepage": "https://github.com/MrChuckomo/poddycast-mini#readme"
+}
