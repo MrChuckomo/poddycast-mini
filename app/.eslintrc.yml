@@ -12,4 +12,6 @@ parserOptions:
   ecmaVersion: 2018
 plugins:
   - vue
-rules: {}
+rules: {
+  indent: ["warn", 4]
+}
