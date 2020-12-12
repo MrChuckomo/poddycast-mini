@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-
+    <script src="./node_modules/vue/dist/vue.js"></script>
     <script>
         require('@popperjs/core')
         require('bootstrap')
@@ -25,5 +25,17 @@
         and Electron
         <script>document.write(process.versions.electron)</script>.
     </p>
+    <div id="app">
+        {{ message }}
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!'
+            }
+        })
+    </script>
 </body>
 </html>
