@@ -38,11 +38,12 @@
         </div>
     </div>
 
-    <div class="fixed-bottom bg-dark">
-        <span>Home</span>
-        <span>Search</span>
-        <span>Player</span>
-        <span>History</span>
+    <div id="app2" class="fixed-bottom bg-dark row">
+        <nav-item
+            v-for="item in items"
+            v-bind:icon="item"
+            v-bind:key="item.id"
+        ></nav-item>
     </div>
 
 
@@ -66,6 +67,17 @@
             `
         })
 
+        Vue.component('nav-item', {
+            props: ['icon'],
+            template: `
+                <div class="col text-warning">
+                    <svg class="bi" width="32" height="32" fill="currentColor">
+                        <use v-bind:xlink:href="icon.name"/>
+                    </svg>
+                </div>
+            `
+        })
+
         var app = new Vue({
             el: '#app',
             data: {
@@ -77,6 +89,18 @@
                 calliTunes: function () {
                     makeRequest(this)
                 }
+            }
+        })
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+                items: [
+                    { id: 0, name: "./node_modules/bootstrap-icons/bootstrap-icons.svg#house" },
+                    { id: 1, name: "./node_modules/bootstrap-icons/bootstrap-icons.svg#search" },
+                    { id: 2, name: "./node_modules/bootstrap-icons/bootstrap-icons.svg#music-note-beamed" },
+                    { id: 3, name: "./node_modules/bootstrap-icons/bootstrap-icons.svg#clock-history" }
+                ]
             }
         })
     </script>
