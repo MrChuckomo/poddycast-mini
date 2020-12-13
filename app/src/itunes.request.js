@@ -1,18 +1,22 @@
 const https = require('https')
 
-function makeRequest (_query) {
+function makeRequest (vueRef) {
     console.log('request started')
 
-    const request = https.request(getITunesRequestOptions(_query), function (_res) {
-        const Chunks = []
+    const request = https.request(getITunesRequestOptions(vueRef.message), function (_res) {
+        const chunks = []
 
         _res.on('data', function (_chunk) {
-            Chunks.push(_chunk)
+            chunks.push(_chunk)
         })
+
         _res.on('end', function () {
-            // _Callback(Buffer.concat(Chunks).toString().trim(), _eRequest, _Options)
-            const results = Buffer.concat(Chunks).toString().trim()
-            console.log(JSON.parse(results))
+            const response = Buffer.concat(chunks).toString().trim()
+            const results = JSON.parse(response)
+
+            console.log(results.results)
+            vueRef.resultcount = results.resultCount
+            vueRef.results = results.results
         })
     })
 
