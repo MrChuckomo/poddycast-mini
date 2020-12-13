@@ -6,12 +6,13 @@ function makeRequest (_query) {
     const request = https.request(getITunesRequestOptions(_query), function (_res) {
         const Chunks = []
 
-        _res.on('data', function (_Chunk) {
-            Chunks.push(_Chunk)
+        _res.on('data', function (_chunk) {
+            Chunks.push(_chunk)
         })
         _res.on('end', function () {
             // _Callback(Buffer.concat(Chunks).toString().trim(), _eRequest, _Options)
-            console.log(Buffer.concat(Chunks).toString().trim())
+            const results = Buffer.concat(Chunks).toString().trim()
+            console.log(JSON.parse(results))
         })
     })
 
