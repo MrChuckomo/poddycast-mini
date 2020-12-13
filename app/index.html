@@ -13,9 +13,9 @@
         require('bootstrap')
     </script>
 </head>
-<body>
+<body class="bg-dark text-secondary">
     <h1>Poddycast-Mini</h1>
-    <div class="alert alert-primary" role="alert">
+    <div class="alert alert-warning" role="alert">
         A simple primary alert—check it out!
     </div>
     <p>
@@ -32,8 +32,18 @@
             <input type="text" v-model="message" class="form-control" id="floatingInput" placeholder="Podcast">
             <label for="floatingInput">Search term</label>
         </div>
-        <button class="btn btn-primary" v-on:click="calliTunes">Search iTunes</button>
+        <button class="btn btn-warning" v-on:click="calliTunes">Search iTunes</button>
         {{ message }}
+    </div>
+
+    <div id="app-4" class="p-3">
+        Results
+        <ul class="list-group">
+            <li v-for="todo in todos" class="list-group-item list-group-item-action list-group-item-dark d-flex justify-content-between align-items-center">
+                {{ todo.text }}
+                <span class="badge bg-warning text-dark">+</span>
+            </li>
+        </ul>
     </div>
 
     <script>
@@ -46,6 +56,17 @@
                 calliTunes: function () {
                     makeRequest(this.message)
                 }
+            }
+        })
+
+        var app4 = new Vue({
+            el: '#app-4',
+            data: {
+                todos: [
+                    { text: 'Learn JavaScript' },
+                    { text: 'Learn Vue' },
+                    { text: 'Build something awesome' }
+                ]
             }
         })
     </script>
