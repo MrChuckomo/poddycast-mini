@@ -1,34 +1,39 @@
 const https = require('https')
 
-function makeRequest (query) {
+function makeRequest (_query) {
     console.log('request started')
 
-    const Req = https.request(getITunesOptions(query), function (_Res) {
+    const request = https.request(getITunesRequestOptions(_query), function (_res) {
         const Chunks = []
 
-        _Res.on('data', function (_Chunk) {
+        _res.on('data', function (_Chunk) {
             Chunks.push(_Chunk)
         })
-        _Res.on('end', function () {
+        _res.on('end', function () {
             // _Callback(Buffer.concat(Chunks).toString().trim(), _eRequest, _Options)
             console.log(Buffer.concat(Chunks).toString().trim())
         })
     })
 
-    if (Req !== undefined) {
-        Req.on('error', function (_Error) {
+    if (request !== undefined) {
+        request.on('error', function (_Error) {
             console.log('Problem with request: ' + _Error.message)
         })
 
-        Req.end()
+        request.end()
     }
 }
 
-function getITunesOptions (_SearchTerm) {
+function getITunesRequestOptions (_searchTerm) {
+    const basePath = '/search?term='
+    const query = encodeURIComponent(_searchTerm)
+    const parameter = '&media=podcast'
+    const path = basePath + query + parameter
+
     return {
-        method: 'GET',
         host: 'itunes.apple.com',
-        port: 443,
-        path: '/search?term=' + _SearchTerm + '&media=podcast'
+        method: 'GET',
+        path: path,
+        port: 443
     }
 }
