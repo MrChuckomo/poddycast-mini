@@ -13,8 +13,8 @@
         require('bootstrap')
     </script>
 </head>
-<body onload="makeRequest()">
-    <h1>Hello World!</h1>
+<body>
+    <h1>Poddycast-Mini</h1>
     <div class="alert alert-primary" role="alert">
         A simple primary alert—check it out!
     </div>
@@ -26,7 +26,13 @@
         and Electron
         <script>document.write(process.versions.electron)</script>.
     </p>
-    <div id="app">
+    <div id="app" class="p-3">
+        
+        <div class="form-floating mb-3">
+            <input type="text" v-model="message" class="form-control" id="floatingInput" placeholder="Podcast">
+            <label for="floatingInput">Search term</label>
+        </div>
+        <button class="btn btn-primary" v-on:click="calliTunes">Search iTunes</button>
         {{ message }}
     </div>
 
@@ -34,7 +40,12 @@
         var app = new Vue({
             el: '#app',
             data: {
-                message: 'Hello Vue!'
+                message: 'freakshow'
+            },
+            methods: {
+                calliTunes: function () {
+                    makeRequest(this.message)
+                }
             }
         })
     </script>

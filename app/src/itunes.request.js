@@ -1,9 +1,9 @@
 const https = require('https')
 
-function makeRequest () {
+function makeRequest (query) {
     console.log('request started')
 
-    const Req = https.request(getITunesOptions('freakshow'), function (_Res) {
+    const Req = https.request(getITunesOptions(query), function (_Res) {
         const Chunks = []
 
         _Res.on('data', function (_Chunk) {
