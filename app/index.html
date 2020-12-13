@@ -7,12 +7,13 @@
     
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./src/itunes.request.js"></script>
     <script>
         require('@popperjs/core')
         require('bootstrap')
     </script>
 </head>
-<body>
+<body onload="makeRequest()">
     <h1>Hello World!</h1>
     <div class="alert alert-primary" role="alert">
         A simple primary alert—check it out!
