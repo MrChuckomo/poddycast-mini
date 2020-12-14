@@ -5,16 +5,17 @@
     "main": "main.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "package:all": "electron-packager ./ --out=./builds --overwrite --platform=all --icon=img/poddycast-app_icon",
-        "package:linux": "electron-packager ./ --out=./builds --overwrite --platform=linux --icon=img/poddycast-app_icon",
-        "package:macappstore": "electron-packager ./ --out=./builds --overwrite --platform=mas --icon=img/poddycast-app_icon",
-        "package:osx": "electron-packager ./ --out=./builds --overwrite --platform=darwin --icon=img/poddycast-app_icon",
-        "package:win": "electron-packager ./ --out=./builds --overwrite --platform=win32 --icon=img/poddycast-app_icon",
+        "package:all": "electron-packager ./ --out=./builds --overwrite --platform=all --icon=img/poddycast-mini-app_icon",
+        "package:linux": "electron-packager ./ --out=./builds --overwrite --platform=linux --icon=img/poddycast-mini-app_icon",
+        "package:macappstore": "electron-packager ./ --out=./builds --overwrite --platform=mas --icon=img/poddycast-mini-app_icon",
+        "package:osx": "electron-packager ./ --out=./builds --overwrite --platform=darwin --icon=img/poddycast-mini-app_icon",
+        "package:win": "electron-packager ./ --out=./builds --overwrite --platform=win32 --icon=img/poddycast-mini-app_icon",
         "start": "electron ."
     },
     "dependencies": {
         "@popperjs/core": "^2.5.4",
         "bootstrap": "^5.0.0-beta1",
+        "bootstrap-icons": "^1.2.1",
         "electron": "^11.0.4",
         "vue": "^2.6.12"
     },
@@ -43,5 +44,11 @@
     "bugs": {
         "url": "https://github.com/MrChuckomo/poddycast-mini/issues"
     },
-    "homepage": "https://github.com/MrChuckomo/poddycast-mini#readme"
+    "homepage": "https://github.com/MrChuckomo/poddycast-mini#readme",
+    "urls": [
+        {
+            "name": "Icon converter",
+            "url": "https://cloudconvert.com/png-to-icns"
+        }
+    ]
 }

@@ -1,39 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Document</title>
+    <title>Poddycast-Mini</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./src/itunes.request.js"></script>
     <script>
         require('@popperjs/core')
         require('bootstrap')
     </script>
 </head>
-<body>
-    <h1>Hello World!</h1>
-    <div class="alert alert-primary" role="alert">
-        A simple primary alert—check it out!
-    </div>
-    <p>
-        We are using node
-        <script>document.write(process.versions.node)</script>,
-        Chrome
-        <script>document.write(process.versions.chrome)</script>,
-        and Electron
-        <script>document.write(process.versions.electron)</script>.
-    </p>
-    <div id="app">
-        {{ message }}
+<body class="bg-dark text-secondary">
+    <h1>Poddycast-Mini</h1>
+
+    <div id="app" class="p-3">
+        <div class="form-floating mb-3">
+            <input type="text" v-model="message" class="form-control" id="floatingInput" placeholder="Podcast">
+            <label for="floatingInput">Search term</label>
+        </div>
+        <button class="btn btn-warning" v-on:click="calliTunes">Search iTunes</button>
+        <div>
+            <div>
+                Results
+                ({{ resultcount }})
+            </div>
+            <ul class="list-group">
+                <search-item
+                    v-for="item in results"
+                    v-bind:searchresult="item"
+                    v-bind:key="item.id"
+                ></search-item>
+            </ul>
+
+        </div>
     </div>
 
+    <div id="app2" class="fixed-bottom bg-dark row">
+        <nav-item
+            v-for="item in items"
+            v-bind:icon="item"
+            v-bind:key="item.id"
+        ></nav-item>
+    </div>
+
+
     <script>
+        Vue.component('search-item', {
+            props: ['searchresult'],
+            template: `
+                <li class="list-group-item list-group-item-action list-group-item-dark" v-bind:feedUrl="searchresult.feedUrl">
+                    <div class="row">
+                        <div class="col-auto">
+                            <img v-bind:src="searchresult.artworkUrl100" class="rounded shadow-sm" style="width: 50px">
+                        </div>
+                        <div class="col text-truncate">
+                            <div>
+                            {{ searchresult.collectionName }}
+                            </div>
+                            <small class="font-monospace text-muted">{{ searchresult.artistName }}</small>
+                        </div>
+                        <div class="col-auto">
+                            <svg class="bi" width="16" height="16" fill="currentColor">
+                                <use xlink:href="./node_modules/bootstrap-icons/bootstrap-icons.svg#arrow-right-circle"/>
+                            </svg>
+                        </div>
+                    </div>
+                </li>
+            `
+        })
+
+        Vue.component('nav-item', {
+            props: ['icon'],
+            template: `
+                <div class="col text-warning">
+                    <svg class="bi" width="32" height="32" fill="currentColor">
+                        <use v-bind:xlink:href="icon.name"/>
+                    </svg>
+                </div>
+            `
+        })
+
         var app = new Vue({
             el: '#app',
             data: {
-                message: 'Hello Vue!'
+                message: null,
+                resultcount: 0,
+                results: []
+            },
+            methods: {
+                calliTunes: function () {
+                    makeRequest(this)
+                }
+            }
+        })
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+                items: [
+                    { id: 0, name: "./node_modules/bootstrap-icons/bootstrap-icons.svg#house" },
+                    { id: 1, name: "./node_modules/bootstrap-icons/bootstrap-icons.svg#search" },
+                    { id: 2, name: "./node_modules/bootstrap-icons/bootstrap-icons.svg#music-note-beamed" },
+                    { id: 3, name: "./node_modules/bootstrap-icons/bootstrap-icons.svg#clock-history" }
+                ]
             }
         })
     </script>
