@@ -32,7 +32,7 @@ function makeRequest (vueRef) {
 function getITunesRequestOptions (_searchTerm) {
     const basePath = '/search?term='
     const query = encodeURIComponent(_searchTerm)
-    const parameter = '&media=podcast'
+    const parameter = '&media=podcast&limit=25'
     const path = basePath + query + parameter
 
     return {
