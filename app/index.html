@@ -14,38 +14,37 @@
     </script>
 </head>
 <body class="bg-dark text-secondary">
-    <h1>Poddycast-Mini</h1>
 
-    <div id="app" class="p-3">
-        <div class="form-floating mb-3">
-            <input type="text" v-model="message" class="form-control" id="floatingInput" placeholder="Podcast">
-            <label for="floatingInput">Search term</label>
-        </div>
-        <button class="btn btn-warning" v-on:click="calliTunes">Search iTunes</button>
-        <div>
-            <div>
+    <div class="container-fluid mt-3">
+        <div id="app">
+            <div class="form-floating mb-3">
+                <input type="text" v-model="message" class="form-control" id="floatingInput" placeholder="Podcast">
+                <label for="floatingInput">Search term</label>
+            </div>
+            <button class="btn btn-warning" v-on:click="calliTunes">Search iTunes</button>
+            <span class="mx-3">
                 Results
                 ({{ resultcount }})
+            </span>
+            <div class="my-3">
+                <ul class="list-group overflow-scroll" style="height: 300px;">
+                    <search-item
+                        v-for="item in results"
+                        v-bind:searchresult="item"
+                        v-bind:key="item.id"
+                    ></search-item>
+                </ul>
             </div>
-            <ul class="list-group">
-                <search-item
-                    v-for="item in results"
-                    v-bind:searchresult="item"
-                    v-bind:key="item.id"
-                ></search-item>
-            </ul>
+        </div>
 
+        <div id="app2" class="fixed-bottom bg-dark row border-top border-2 border-danger">
+            <nav-item
+                v-for="item in items"
+                v-bind:icon="item"
+                v-bind:key="item.id"
+            ></nav-item>
         </div>
     </div>
-
-    <div id="app2" class="fixed-bottom bg-dark row">
-        <nav-item
-            v-for="item in items"
-            v-bind:icon="item"
-            v-bind:key="item.id"
-        ></nav-item>
-    </div>
-
 
     <script>
         Vue.component('search-item', {
@@ -62,7 +61,7 @@
                             </div>
                             <small class="font-monospace text-muted">{{ searchresult.artistName }}</small>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-auto my-auto">
                             <svg class="bi" width="16" height="16" fill="currentColor">
                                 <use xlink:href="./node_modules/bootstrap-icons/bootstrap-icons.svg#arrow-right-circle"/>
                             </svg>
@@ -75,10 +74,12 @@
         Vue.component('nav-item', {
             props: ['icon'],
             template: `
-                <div class="col text-warning">
-                    <svg class="bi" width="32" height="32" fill="currentColor">
-                        <use v-bind:xlink:href="icon.name"/>
-                    </svg>
+                <div class="col text-center m-3">
+                    <a href="#" class="text-warning" onclick="">
+                        <svg class="bi" width="24" height="24" fill="currentColor">
+                            <use v-bind:xlink:href="icon.name"/>
+                        </svg>
+                    </a>
                 </div>
             `
         })
