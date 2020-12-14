@@ -51,16 +51,21 @@
         Vue.component('search-item', {
             props: ['searchresult'],
             template: `
-                <li class="list-group-item list-group-item-action list-group-item-dark">
+                <li class="list-group-item list-group-item-action list-group-item-dark" v-bind:feedUrl="searchresult.feedUrl">
                     <div class="row">
                         <div class="col-auto">
                             <img v-bind:src="searchresult.artworkUrl100" class="rounded shadow-sm" style="width: 50px">
                         </div>
-                        <div class="col">
-                            <p class="m-0">
+                        <div class="col text-truncate">
+                            <div>
                             {{ searchresult.collectionName }}
-                            </p>
-                            <small class="text-muted">{{ searchresult.artistName }}</small>
+                            </div>
+                            <small class="font-monospace text-muted">{{ searchresult.artistName }}</small>
+                        </div>
+                        <div class="col-auto">
+                            <svg class="bi" width="16" height="16" fill="currentColor">
+                                <use xlink:href="./node_modules/bootstrap-icons/bootstrap-icons.svg#arrow-right-circle"/>
+                            </svg>
                         </div>
                     </div>
                 </li>
