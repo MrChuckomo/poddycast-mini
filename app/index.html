@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/custom.css">
     <script src="./node_modules/vue/dist/vue.js"></script>
     <script src="./src/itunes.request.js"></script>
     <script>
@@ -113,13 +114,11 @@
                 activateNav: function (id) {
                     if (document.getElementsByClassName('active-nav')[0] !== undefined) {
                         document.getElementsByClassName('active-nav')[0].classList.remove(
-                            'active-nav',
-                            'bg-danger'
+                            'active-nav'
                         )
                     }
                     document.getElementById(id).classList.add(
-                        'active-nav',
-                        'bg-danger'
+                        'active-nav'
                     )
                 }
             }
