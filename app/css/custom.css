@@ -10,3 +10,7 @@
 .active-nav a svg {
     color: #dc3545!important;
 }
+
+.hide {
+    display: none;    
+}

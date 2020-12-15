@@ -18,7 +18,12 @@
 <body class="bg-dark text-secondary">
 
     <div class="container-fluid mt-3">
-        <div id="app">
+
+        <div id="homeFragment" class="hide">
+            <home-fragment></home-fragment>
+        </div>
+
+        <div id="searchFragment">
             <div class="form-floating mb-3">
                 <input type="text" v-model="message" class="form-control" id="floatingInput" placeholder="Podcast">
                 <label for="floatingInput">Search term</label>
@@ -39,6 +44,15 @@
             </div>
         </div>
 
+        <div id="playerFragment" class="hide">
+            <player-fragment></player-fragment>
+        </div>
+
+        <div id="historyFragment" class="hide">
+            <history-fragment></history-fragment>
+        </div>
+
+
         <div id="navContainer" class="fixed-bottom bg-dark row border-top border-2 border-danger">
             <nav-item
                 v-for="item in items"
@@ -50,8 +64,10 @@
     </div>
 
     <script>
-        var app = new Vue({
-            el: '#app',
+        new Vue({ el: '#homeFragment' })
+        
+        var searchFragment = new Vue({
+            el: '#searchFragment',
             data: {
                 message: null,
                 resultcount: 0,
@@ -63,6 +79,9 @@
                 }
             }
         })
+
+        new Vue({ el: '#playerFragment' })
+        new Vue({ el: '#historyFragment' })
 
         var navContainer = new Vue({
             el: '#navContainer',
@@ -81,9 +100,44 @@
                             'active-nav'
                         )
                     }
-                    document.getElementById(id).classList.add(
-                        'active-nav'
-                    )
+                    document.getElementById(id).classList.add('active-nav')
+
+                    switch (id) {
+                        case 'nav0':
+                            console.log('Fragment Home');
+                            document.getElementById('homeFragment').classList.remove('hide')
+                            document.getElementById('searchFragment').classList.add('hide')
+                            document.getElementById('playerFragment').classList.add('hide')
+                            document.getElementById('historyFragment').classList.add('hide')
+                            break;
+                    
+                        case 'nav1':
+                            console.log('Fragment Search');
+                            document.getElementById('homeFragment').classList.add('hide')
+                            document.getElementById('searchFragment').classList.remove('hide')
+                            document.getElementById('playerFragment').classList.add('hide')
+                            document.getElementById('historyFragment').classList.add('hide')
+                            break;
+                            
+                        case 'nav2':
+                            console.log('Fragment Player');
+                            document.getElementById('homeFragment').classList.add('hide')
+                            document.getElementById('searchFragment').classList.add('hide')
+                            document.getElementById('playerFragment').classList.remove('hide')
+                            document.getElementById('historyFragment').classList.add('hide')
+                            break;
+                            
+                        case 'nav3':
+                            console.log('Fragment History');
+                            document.getElementById('homeFragment').classList.add('hide')
+                            document.getElementById('searchFragment').classList.add('hide')
+                            document.getElementById('playerFragment').classList.add('hide')
+                            document.getElementById('historyFragment').classList.remove('hide')
+                            break;
+                    
+                        default:
+                            break;
+                    }
                 }
             }
         })
