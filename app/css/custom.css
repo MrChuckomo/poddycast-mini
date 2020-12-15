@@ -8,7 +8,8 @@
 }
 
 .active-nav a svg {
-    color: #dc3545!important;
+    color: #e45d6a!important;
+    filter: drop-shadow( 1px 1px 5px #e45d6a);
 }
 
 .hide {
