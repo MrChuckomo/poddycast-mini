@@ -26,7 +26,7 @@ Vue.component('history-fragment', {
 Vue.component('search-item', {
     props: ['searchresult'],
     template: `
-        <li class="list-group-item list-group-item-action list-group-item-dark" v-bind:feedUrl="searchresult.feedUrl">
+        <li class="list-group-item list-group-item-action list-group-item-white" v-bind:feedUrl="searchresult.feedUrl">
             <div class="row">
                 <div class="col-auto">
                     <img v-bind:src="searchresult.artworkUrl100" class="rounded shadow-sm" style="width: 50px">
