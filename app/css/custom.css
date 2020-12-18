@@ -1,4 +1,4 @@
-#navContainer .col a:hover {
+/* #navContainer .col a:hover {
     color: #fdf500!important;
 }
 
@@ -11,7 +11,7 @@
     color: #e45d6a!important;
     filter: drop-shadow( 1px 1px 5px #e45d6a);
 }
-
+*/
 .hide {
     display: none;    
 }

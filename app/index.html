@@ -23,7 +23,7 @@
                 <img src="https://is1-ssl.mzstatic.com/image/thumb/Podcasts113/v4/ed/47/bd/ed47bd9f-b9b8-f2e5-8c53-4092119a5308/mza_5032705334135040560.jpg/100x100bb.jpg"
                     class="rounded shadow-sm" style="width: 50px;">
             </div>
-        
+
             <div class="col p-2">
                 <div class="text-white">Freakshow</div>
                 <small class="text-white text-muted font-monospace">FS254 Chat Roulette Business Edition</small>
@@ -32,27 +32,19 @@
                         aria-valuemax="100"></div>
                 </div>
             </div>
-        
-            <div class="col-auto border-start border-secondary p-2">
-                <button class="btn btn-transparent me-2" type="button">
-                    <svg class="bi text-warning" width="24" height="24" fill="currentColor">
-                        <use xlink:href="./node_modules/bootstrap-icons/bootstrap-icons.svg#clock-history" />
-                    </svg>
-                </button>
-                <button class="btn btn-transparent" type="submit">
-                    <svg class="bi text-warning" width="24" height="24" fill="currentColor">
-                        <use xlink:href="./node_modules/bootstrap-icons/bootstrap-icons.svg#search" />
-                    </svg>
-                </button>
+
+            <div id="navContainer" class="col-auto border-start border-secondary p-2">
+                <nav-item
+                    v-for="item in items"
+                    v-bind:icon="item"
+                    v-bind:key="item.id"
+                    v-on:click.native="activateNav(item.visible_id)"
+                ></nav-item>
             </div>
         </div>
     </nav>
 
     <div class="container-fluid mt-3">
-
-        <div id="homeFragment" class="hide">
-            <home-fragment></home-fragment>
-        </div>
 
         <div id="searchFragment">
             <div class="input-group input-group-sm mb-3">
@@ -74,28 +66,12 @@
             </div>
         </div>
 
-        <div id="playerFragment" class="hide">
-            <player-fragment></player-fragment>
-        </div>
-
         <div id="historyFragment" class="hide">
             <history-fragment></history-fragment>
         </div>
-
-
-        <!-- <div id="navContainer" class="fixed-bottom bg-dark row border-top border-2 border-danger">
-            <nav-item
-                v-for="item in items"
-                v-bind:icon="item"
-                v-bind:key="item.id"
-                v-on:click.native="activateNav(item.visible_id)"
-            ></nav-item>
-        </div> -->
     </div>
 
     <script>
-        new Vue({ el: '#homeFragment' })
-        
         var searchFragment = new Vue({
             el: '#searchFragment',
             data: {
@@ -110,17 +86,14 @@
             }
         })
 
-        new Vue({ el: '#playerFragment' })
         new Vue({ el: '#historyFragment' })
 
         var navContainer = new Vue({
             el: '#navContainer',
             data: {
                 items: [
-                    { id: 0, visible_id: 'nav0', name: "./node_modules/bootstrap-icons/bootstrap-icons.svg#house" },
+                    { id: 0, visible_id: 'nav0', name: "./node_modules/bootstrap-icons/bootstrap-icons.svg#clock-history" },
                     { id: 1, visible_id: 'nav1', name: "./node_modules/bootstrap-icons/bootstrap-icons.svg#search" },
-                    { id: 2, visible_id: 'nav2', name: "./node_modules/bootstrap-icons/bootstrap-icons.svg#music-note-beamed" },
-                    { id: 3, visible_id: 'nav3', name: "./node_modules/bootstrap-icons/bootstrap-icons.svg#clock-history" }
                 ]
             },
             methods: {
@@ -134,37 +107,17 @@
 
                     switch (id) {
                         case 'nav0':
-                            console.log('Fragment Home');
-                            document.getElementById('homeFragment').classList.remove('hide')
-                            document.getElementById('searchFragment').classList.add('hide')
-                            document.getElementById('playerFragment').classList.add('hide')
-                            document.getElementById('historyFragment').classList.add('hide')
-                            break;
-                    
-                        case 'nav1':
-                            console.log('Fragment Search');
-                            document.getElementById('homeFragment').classList.add('hide')
-                            document.getElementById('searchFragment').classList.remove('hide')
-                            document.getElementById('playerFragment').classList.add('hide')
-                            document.getElementById('historyFragment').classList.add('hide')
-                            break;
-                            
-                        case 'nav2':
-                            console.log('Fragment Player');
-                            document.getElementById('homeFragment').classList.add('hide')
-                            document.getElementById('searchFragment').classList.add('hide')
-                            document.getElementById('playerFragment').classList.remove('hide')
-                            document.getElementById('historyFragment').classList.add('hide')
-                            break;
-                            
-                        case 'nav3':
                             console.log('Fragment History');
-                            document.getElementById('homeFragment').classList.add('hide')
                             document.getElementById('searchFragment').classList.add('hide')
-                            document.getElementById('playerFragment').classList.add('hide')
                             document.getElementById('historyFragment').classList.remove('hide')
                             break;
-                    
+
+                        case 'nav1':
+                            console.log('Fragment Search');
+                            document.getElementById('searchFragment').classList.remove('hide')
+                            document.getElementById('historyFragment').classList.add('hide')
+                            break;
+
                         default:
                             break;
                     }
