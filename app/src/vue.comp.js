@@ -1,3 +1,4 @@
+const { log } = require('console')
 
 Vue.component('history-fragment', {
     template: `
@@ -10,7 +11,7 @@ Vue.component('history-fragment', {
 Vue.component('search-item', {
     props: ['searchresult'],
     template: `
-        <li class="list-group-item list-group-item-action list-group-item-white" v-bind:feedUrl="searchresult.feedUrl">
+        <li v-on:click="callFeed" class="list-group-item list-group-item-action list-group-item-white" v-bind:feedUrl="searchresult.feedUrl">
             <div class="row">
                 <div class="col-auto">
                     <img v-bind:src="searchresult.artworkUrl100" class="rounded shadow-sm" style="width: 50px">
@@ -28,7 +29,48 @@ Vue.component('search-item', {
                 </div>
             </div>
         </li>
-    `
+    `,
+    methods: {
+        callFeed: function () {
+            console.log('item clicked: ' + this.searchresult.feedUrl)
+
+            const http = require('http')
+            const https = require('https')
+
+            switch (this.searchresult.feedUrl.includes('https')) {
+            case true:
+                https.request(this.searchresult.feedUrl, function (_res) {
+                    const chunks = []
+
+                    _res.on('data', function (_chunk) {
+                        chunks.push(_chunk)
+                    })
+
+                    _res.on('end', function () {
+                        const response = Buffer.concat(chunks).toString().trim()
+                        console.log(response)
+                    })
+                })
+                break
+            case false:
+                http.request(this.searchresult.feedUrl, function (_res) {
+                    const chunks = []
+
+                    _res.on('data', function (_chunk) {
+                        chunks.push(_chunk)
+                    })
+
+                    _res.on('end', function () {
+                        const response = Buffer.concat(chunks).toString().trim()
+                        console.log(response)
+                    })
+                })
+                break
+            default:
+                break
+            }
+        }
+    }
 })
 
 Vue.component('nav-item', {
