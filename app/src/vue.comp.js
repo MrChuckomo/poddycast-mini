@@ -34,41 +34,15 @@ Vue.component('search-item', {
         callFeed: function () {
             console.log('item clicked: ' + this.searchresult.feedUrl)
 
-            const http = require('http')
-            const https = require('https')
-
-            switch (this.searchresult.feedUrl.includes('https')) {
-            case true:
-                https.request(this.searchresult.feedUrl, function (_res) {
-                    const chunks = []
-
-                    _res.on('data', function (_chunk) {
-                        chunks.push(_chunk)
-                    })
-
-                    _res.on('end', function () {
-                        const response = Buffer.concat(chunks).toString().trim()
-                        console.log(response)
-                    })
-                })
-                break
-            case false:
-                http.request(this.searchresult.feedUrl, function (_res) {
-                    const chunks = []
-
-                    _res.on('data', function (_chunk) {
-                        chunks.push(_chunk)
-                    })
-
-                    _res.on('end', function () {
-                        const response = Buffer.concat(chunks).toString().trim()
-                        console.log(response)
-                    })
-                })
-                break
-            default:
-                break
+            const request = require('request')
+            const options = {
+                method: 'GET',
+                url: this.searchresult.feedUrl
             }
+            request(options, function (error, response) {
+                if (error) throw new Error(error)
+                console.log(response.body)
+            })
         }
     }
 })
