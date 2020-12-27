@@ -59,15 +59,24 @@
                 Results
                 ({{ resultcount }})
             </span>
+            <span>
+                Episodes
+                ({{ episodes }})
+            </span>
             <div class="my-3">
                 <ul class="list-group">
                     <search-item
                         v-for="item in results"
                         v-bind:searchresult="item"
                         v-bind:key="item.id"
+                        v-on:click.native="callFeed(item)"
                     ></search-item>
                 </ul>
             </div>
+        </div>
+
+        <div id="feedFragment" class="hide">
+            <feed-fragment></feed-fragment>
         </div>
 
         <div id="historyFragment" class="hide">
@@ -81,11 +90,50 @@
             data: {
                 message: null,
                 resultcount: 0,
-                results: []
+                results: [],
+                episodes: []
             },
             methods: {
                 calliTunes: function () {
                     makeRequest(this)
+                },
+                callFeed: function (item) {
+                    // document.getElementById('searchFragment').classList.add('hide')
+                    // document.getElementById('historyFragment').classList.add('hide')
+                    // document.getElementById('feedFragment').classList.remove('hide')
+
+                    console.log('item clicked: ' + item.feedUrl)
+
+                    const vueRef = this
+
+                    const request = require('request')
+                    const options = {
+                        method: 'GET',
+                        url: item.feedUrl
+                    }
+                    request(options, function (error, response) {
+                        if (error) throw new Error(error)
+                        // console.log(response.body)
+
+                        const Parser = new DOMParser()
+                        const xmlDoc = Parser.parseFromString(response.body, 'text/xml')
+
+                        console.log(xmlDoc)
+
+                        
+                        console.log(vueRef.episodes)
+                        vueRef.episodes = xmlDoc.getElementsByTagName('item')
+                        console.log(vueRef.episodes)
+
+                        return vueRef.episodes
+
+                        // for (let i = 0; i < xmlDoc.getElementsByTagName('item').length; i++) {
+                        //     const item = xmlDoc.getElementsByTagName('item')[i]
+
+                        //     console.log(item)
+                        //     console.log(item.getElementsByTagName('title')[0].childNodes[0].nodeValue)
+                        // }
+                    })
                 }
             }
         })
