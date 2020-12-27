@@ -74,7 +74,7 @@
                 </ul>
             </div>
         </div>
-
+        
         <div id="feedFragment" class="hide">
             <feed-fragment></feed-fragment>
         </div>
@@ -98,13 +98,15 @@
                     makeRequest(this)
                 },
                 callFeed: function (item) {
-                    // document.getElementById('searchFragment').classList.add('hide')
+                    document.getElementById('searchFragment').classList.add('hide')
                     // document.getElementById('historyFragment').classList.add('hide')
-                    // document.getElementById('feedFragment').classList.remove('hide')
+                    document.getElementById('feedFragment').classList.remove('hide')
 
                     console.log('item clicked: ' + item.feedUrl)
 
                     const vueRef = this
+
+                    new Vue({ el: '#feedFragment' })
 
                     const request = require('request')
                     const options = {
@@ -138,6 +140,7 @@
             }
         })
 
+        
         new Vue({ el: '#historyFragment' })
 
         var navContainer = new Vue({
