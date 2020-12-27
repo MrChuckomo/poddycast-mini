@@ -1,4 +1,3 @@
-const { log } = require('console')
 
 Vue.component('history-fragment', {
     template: `
@@ -8,10 +7,18 @@ Vue.component('history-fragment', {
     `
 })
 
+Vue.component('feed-fragment', {
+    template: `
+        <div id='feedFragment'>
+            <h1>feed</h1>
+        </div>
+    `
+})
+
 Vue.component('search-item', {
     props: ['searchresult'],
     template: `
-        <li v-on:click="callFeed" class="list-group-item list-group-item-action list-group-item-white" v-bind:feedUrl="searchresult.feedUrl">
+        <li class="list-group-item list-group-item-action list-group-item-white" v-bind:feedUrl="searchresult.feedUrl">
             <div class="row">
                 <div class="col-auto">
                     <img v-bind:src="searchresult.artworkUrl100" class="rounded shadow-sm" style="width: 50px">
@@ -29,22 +36,7 @@ Vue.component('search-item', {
                 </div>
             </div>
         </li>
-    `,
-    methods: {
-        callFeed: function () {
-            console.log('item clicked: ' + this.searchresult.feedUrl)
-
-            const request = require('request')
-            const options = {
-                method: 'GET',
-                url: this.searchresult.feedUrl
-            }
-            request(options, function (error, response) {
-                if (error) throw new Error(error)
-                console.log(response.body)
-            })
-        }
-    }
+    `
 })
 
 Vue.component('nav-item', {
