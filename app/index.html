@@ -67,12 +67,12 @@
                 </ul>
             </div>
         </div>
-        
+
         <div id="feedFragment" class="hide">
             <div id="feed-spinner" class="spinner-border spinner-border-sm text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
-            <ul class="list-group">
+            <ul class="list-group my-3">
                 <feed-fragment
                     v-for="item in episodes"
                     v-bind:episode="item"
@@ -112,44 +112,35 @@
 
                     console.log('item clicked: ' + item.feedUrl)
 
-                    const vueRef = this
                     const request = require('request')
                     const options = {
                         method: 'GET',
                         url: item.feedUrl
                     }
 
+                    // NOTE: Reset feed episode list
                     feed.episodes = []
 
                     request(options, function (error, response) {
                         if (error) throw new Error(error)
-                        // console.log(response.body)
 
                         const Parser = new DOMParser()
                         const xmlDoc = Parser.parseFromString(response.body, 'text/xml')
 
                         console.log(xmlDoc)
+                        console.log(xmlDoc.getElementsByTagName('item'))
 
-                        
-                        console.log(vueRef.episodes)
-                        vueRef.episodes = xmlDoc.getElementsByTagName('item')
-                        console.log(vueRef.episodes)
-                        console.log(vueRef.episodes[0])
-
-                        feed.episodes = []
-                        // feed.episodes = xmlDoc.getElementsByTagName('item')
 
                         for (let i = 0; i < xmlDoc.getElementsByTagName('item').length; i++) {
                             const episode = xmlDoc.getElementsByTagName('item')[i]
 
                             console.log(episode)
-                            console.log(episode.getElementsByTagName('title')[0].childNodes[0].nodeValue)
-                            console.log(episode.getElementsByTagName('pubDate')[0].childNodes[0].nodeValue)
-                            console.log(item.artworkUrl100)
                             feed.episodes.push({
-                                title: episode.getElementsByTagName('title')[0].childNodes[0].nodeValue,
-                                pubDate: episode.getElementsByTagName('pubDate')[0].childNodes[0].nodeValue,
-                                artworkUrl100: item.artworkUrl100
+                                artworkUrl100: item.artworkUrl100,
+                                title: getValue(episode, 'title'),
+                                pubDate: getValue(episode, 'pubDate'),
+                                duration: getValue(episode, 'itunes:duration'),
+                                summary: getValue(episode, 'itunes:summary'),
                             })
                         }
 
@@ -159,7 +150,20 @@
             }
         })
 
-        
+        function getValue(episode, key) {
+            const value = episode.getElementsByTagName(key)[0]
+
+            console.log(value);
+            if (value === undefined) {
+                return null
+            }
+            else {
+                return value.childNodes[0].nodeValue
+            }
+        }
+
+
+
         new Vue({ el: '#historyFragment' })
 
         var navContainer = new Vue({
