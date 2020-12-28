@@ -29,7 +29,7 @@ Vue.component('feed-fragment', {
                             </span>
                             
                             <svg class="bi text-secondary" width="16" height="16" fill="currentColor">
-                            <use xlink:href="./node_modules/bootstrap-icons/bootstrap-icons.svg#calendar3"/>
+                                <use xlink:href="./node_modules/bootstrap-icons/bootstrap-icons.svg#calendar3"/>
                             </svg>
                             <span class="align-middle">
                                 {{ episode.pubDate }}
