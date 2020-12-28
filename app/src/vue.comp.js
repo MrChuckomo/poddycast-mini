@@ -10,7 +10,7 @@ Vue.component('history-fragment', {
 Vue.component('feed-fragment', {
     props: ['episode'],
     template: `
-        <li class="list-group-item">
+        <li class="list-group-item" v-bind:audioUrl="episode.audioUrl">
             <div class="row">
                 <div class="col-auto">
                     <img v-bind:src="episode.artworkUrl100" class="rounded shadow-sm" style="width: 50px">

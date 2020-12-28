@@ -76,6 +76,7 @@
                 <feed-fragment
                     v-for="item in episodes"
                     v-bind:episode="item"
+                    v-on:click.native="playEpisode(item.audioUrl)"
                 ></feed-fragment>
             </ul>
         </div>
@@ -90,6 +91,11 @@
             el: '#feedFragment',
             data: {
                 episodes: []
+            },
+            methods: {    
+                playEpisode: function (audioUrl) {
+                    console.log(audioUrl);
+                }
             }
         })
 
@@ -141,6 +147,7 @@
                                 pubDate: getValue(episode, 'pubDate'),
                                 duration: getValue(episode, 'itunes:duration'),
                                 summary: getValue(episode, 'itunes:summary'),
+                                audioUrl: episode.getElementsByTagName('enclosure')[0].getAttribute('url'),
                             })
                         }
 
