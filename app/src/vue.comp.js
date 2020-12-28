@@ -11,16 +11,38 @@ Vue.component('feed-fragment', {
     props: ['episode'],
     template: `
         <li class="list-group-item">
-            <img v-bind:src="episode.artworkUrl100" class="rounded shadow-sm" style="width: 50px">
-            <div>
-                {{ episode.title }}
+            <div class="row">
+                <div class="col-auto">
+                    <img v-bind:src="episode.artworkUrl100" class="rounded shadow-sm" style="width: 50px">
+                </div>
+                <div class="col">
+                    <div class="fw-bold">
+                        {{ episode.title }}
+                    </div>
+                    <div class="my-1">
+                        <small class="text-secondary">
+                            <svg class="bi text-secondary" width="16" height="16" fill="currentColor">
+                                <use xlink:href="./node_modules/bootstrap-icons/bootstrap-icons.svg#clock"/>
+                            </svg>
+                            <span class="align-middle">
+                                {{ episode.duration }}
+                            </span>
+                            
+                            <svg class="bi text-secondary" width="16" height="16" fill="currentColor">
+                            <use xlink:href="./node_modules/bootstrap-icons/bootstrap-icons.svg#calendar3"/>
+                            </svg>
+                            <span class="align-middle">
+                                {{ episode.pubDate }}
+                            </span>
+                        </small>
+                    </div>
+                    <div>
+                        <small class="">
+                            {{ episode.summary }}
+                        </small>
+                    </div>
+                </div>
             </div>
-            <div>
-                {{ episode.pubDate }}
-            </div>
-            <small class="text-muted">
-                {{ episode }}
-            </small>
         </li>
     `
 })
