@@ -8,10 +8,20 @@ Vue.component('history-fragment', {
 })
 
 Vue.component('feed-fragment', {
+    props: ['episode'],
     template: `
-        <div id='feedFragment'>
-            <h1>feed</h1>
-        </div>
+        <li class="list-group-item">
+            <img v-bind:src="episode.artworkUrl100" class="rounded shadow-sm" style="width: 50px">
+            <div>
+                {{ episode.title }}
+            </div>
+            <div>
+                {{ episode.pubDate }}
+            </div>
+            <small class="text-muted">
+                {{ episode }}
+            </small>
+        </li>
     `
 })
 
