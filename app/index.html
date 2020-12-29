@@ -92,7 +92,7 @@
             data: {
                 episodes: []
             },
-            methods: {    
+            methods: {
                 playEpisode: function (audioUrl) {
                     console.log(audioUrl);
                 }
@@ -136,7 +136,6 @@
                         console.log(xmlDoc)
                         console.log(xmlDoc.getElementsByTagName('item'))
 
-
                         for (let i = 0; i < xmlDoc.getElementsByTagName('item').length; i++) {
                             const episode = xmlDoc.getElementsByTagName('item')[i]
 
@@ -146,7 +145,7 @@
                                 title: getValue(episode, 'title'),
                                 pubDate: getValue(episode, 'pubDate'),
                                 duration: getValue(episode, 'itunes:duration'),
-                                summary: getValue(episode, 'itunes:summary'),
+                                summary: getValue(episode, 'itunes:summary').substring(0, 200) + '...',
                                 audioUrl: episode.getElementsByTagName('enclosure')[0].getAttribute('url'),
                             })
                         }
