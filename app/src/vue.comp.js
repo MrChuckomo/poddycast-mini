@@ -80,11 +80,4 @@ Vue.component('nav-item', {
             </svg>
         </button>
     `
-// <div v-bind:id="icon.visible_id" class="col text-center p-3">
-//     <a href="#" class="text-warning">
-//         <svg class="bi" width="24" height="24" fill="currentColor">
-//             <use v-bind:xlink:href="icon.name"/>
-//         </svg>
-//     </a>
-// </div>
 })
