@@ -22,8 +22,10 @@
     <nav class="container-fluid bg-dark fixed-top sticky-top">
         <div class="row">
             <div class="col-1 p-2">
-                <img src="https://is1-ssl.mzstatic.com/image/thumb/Podcasts113/v4/ed/47/bd/ed47bd9f-b9b8-f2e5-8c53-4092119a5308/mza_5032705334135040560.jpg/100x100bb.jpg"
-                    class="rounded shadow-sm" style="width: 50px;">
+                <img id="playerArtwork"
+                    src="img/podcast.png"
+                    class="rounded shadow-sm" 
+                    style="width: 50px;">
             </div>
 
             <div class="col p-2">
@@ -80,7 +82,7 @@
                 <feed-fragment
                     v-for="item in episodes"
                     v-bind:episode="item"
-                    v-on:click.native="playEpisode(item.audioUrl)"
+                    v-on:click.native="playEpisode(item.audioUrl, item.audioType, item.audioLength, item.artworkUrl100)"
                 ></feed-fragment>
             </ul>
         </div>
@@ -97,9 +99,12 @@
                 episodes: []
             },
             methods: {
-                playEpisode: function (audioUrl) {
-                    console.log(audioUrl);
+                playEpisode: function (audioUrl, audioType, audioLength, artwork) {
+                    console.log(audioUrl)
+                    console.log(audioType)
+                    console.log(audioLength)
 
+                    setupArtwork(artwork)
                     initPlayback(audioUrl)
                     startPlayback()
                 }
@@ -154,6 +159,8 @@
                                 duration: getValue(episode, 'itunes:duration'),
                                 summary: getValue(episode, 'itunes:summary').substring(0, 200) + '...',
                                 audioUrl: episode.getElementsByTagName('enclosure')[0].getAttribute('url'),
+                                audioType: episode.getElementsByTagName('enclosure')[0].getAttribute('type'),
+                                audioLength: episode.getElementsByTagName('enclosure')[0].getAttribute('length'),
                             })
                         }
 
