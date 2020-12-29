@@ -74,7 +74,7 @@ Vue.component('search-item', {
 Vue.component('nav-item', {
     props: ['icon'],
     template: `
-        <button v-bind:id="icon.visible_id" class="btn btn-transparent me-2" type="button">
+        <button v-bind:id="icon.visible_id" class="btn btn-dark me-2" type="button">
             <svg class="bi text-warning" width="21" height="21" fill="currentColor">
                 <use v-bind:xlink:href="icon.name" />
             </svg>
