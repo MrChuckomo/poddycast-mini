@@ -15,3 +15,11 @@ function startPlayback () {
 function setupArtwork (artwork) {
     document.getElementById('playerArtwork').setAttribute('src', artwork)
 }
+
+function setupCollectionName (collectionName) {
+    document.getElementById('playerCollectionName').innerText = collectionName
+}
+
+function setupTitle (title) {
+    document.getElementById('playerTitle').innerText = title
+}
