@@ -11,3 +11,7 @@ function startPlayback () {
 
     player.play()
 }
+
+function setupArtwork (artwork) {
+    document.getElementById('playerArtwork').setAttribute('src', artwork)
+}
