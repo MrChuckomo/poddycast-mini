@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./css/custom.css">
 
     <script src="./src/itunes.request.js"></script>
+    <script src="./src/audio.player.js"></script>
     <script src="./node_modules/vue/dist/vue.js"></script>
     <script src="./src/vue.comp.js"></script>
     <script>
@@ -28,6 +29,9 @@
             <div class="col p-2">
                 <div class="text-white">Freakshow</div>
                 <small class="text-white text-muted font-monospace">FS254 Chat Roulette Business Edition</small>
+                <audio id="player">
+                    <source src="" type="audio/mpeg">
+                </audio>
                 <div class="progress" style="height: 5px;">
                     <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
                         aria-valuemax="100"></div>
@@ -95,6 +99,9 @@
             methods: {
                 playEpisode: function (audioUrl) {
                     console.log(audioUrl);
+
+                    initPlayback(audioUrl)
+                    startPlayback()
                 }
             }
         })
