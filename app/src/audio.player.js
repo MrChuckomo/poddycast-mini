@@ -12,6 +12,12 @@ function startPlayback () {
     player.play()
 }
 
+function pausePlayback () {
+    const player = document.getElementById('player')
+
+    player.pause()
+}
+
 function setupArtwork (artwork) {
     document.getElementById('playerArtwork').setAttribute('src', artwork)
 }
