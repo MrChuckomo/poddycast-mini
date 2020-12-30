@@ -28,7 +28,7 @@
             <div class="col-1 p-2">
                 <img id="playerArtwork"
                     src="img/podcast.png"
-                    class="rounded shadow-sm" 
+                    class="rounded shadow-sm"
                     style="width: 50px;">
             </div>
 
@@ -42,8 +42,15 @@
                 <div id="playerCollectionName" class="text-white"></div>
                 <small id="playerTitle" class="text-white text-muted font-monospace">No episode selected</small>
                 <div class="progress" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
-                        aria-valuemax="100"></div>
+                    <div
+                        id="playerProgress"
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 0%;"
+                        aria-valuenow="0"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                    ></div>
                 </div>
             </div>
 
@@ -92,11 +99,11 @@
                     v-for="item in episodes"
                     v-bind:episode="item"
                     v-on:click.native="playEpisode(
-                        item.audioUrl, 
-                        item.audioType, 
-                        item.audioLength, 
-                        item.artworkUrl100, 
-                        item.collectionName, 
+                        item.audioUrl,
+                        item.audioType,
+                        item.audioLength,
+                        item.artworkUrl100,
+                        item.collectionName,
                         item.title
                     )"
                 ></feed-fragment>
