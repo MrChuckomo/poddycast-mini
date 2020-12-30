@@ -1,3 +1,8 @@
+/**
+ * Init the player. Set the episode url to audio src.
+ *
+ * @param {url} episodeUrl The episode file (mp3) URL.
+ */
 function initPlayback (episodeUrl) {
     const player = document.getElementById('player')
     const playerSource = player.getElementsByTagName('source')[0]
@@ -6,6 +11,9 @@ function initPlayback (episodeUrl) {
     player.load()
 }
 
+/**
+ * Start the player.
+ */
 function startPlayback () {
     const player = document.getElementById('player')
 
@@ -13,6 +21,9 @@ function startPlayback () {
     player.addEventListener('timeupdate', updateProgress, false)
 }
 
+/**
+ * Pause the player.
+ */
 function pausePlayback () {
     const player = document.getElementById('player')
 
@@ -20,10 +31,8 @@ function pausePlayback () {
 }
 
 /**
- * Creates a new Circle from a diameter.
- *
- * @param {number} d The desired diameter of the circle.
- * @return {Circle} The new Circle object.
+ * Update the player progress bar and
+ * calculates the time to disply it.
  */
 function updateProgress () {
     const player = document.getElementById('player')
@@ -38,24 +47,34 @@ function updateProgress () {
 
     progress.style.width = value + '%'
 
-    const formatTime = getFromatTime(player.currentTime)
+    const formatTime = getFormatTime(player.currentTime)
 
     playerTime.innerText = formatTime.hours + ':' + formatTime.minutes + '.' + formatTime.seconds
 }
 
 /**
- * Creates a new Circle from a diameter.
+ * Set the player artwork component.
  *
- * @param {string} artwork The desired diameter of the circle.
+ * @param {url} artwork The artwork URL to display.
  */
 function setupArtwork (artwork) {
     document.getElementById('playerArtwork').setAttribute('src', artwork)
 }
 
+/**
+ * Set the player collection name component.
+ *
+ * @param {string} collectionName The collection name (Podcast) to display.
+ */
 function setupCollectionName (collectionName) {
     document.getElementById('playerCollectionName').innerText = collectionName
 }
 
+/**
+ * Set the player title component.
+ *
+ * @param {string} title The title (episode) to display.
+ */
 function setupTitle (title) {
     document.getElementById('playerTitle').innerText = title
 }
@@ -63,12 +82,12 @@ function setupTitle (title) {
 // --------------------------------------------------------------------------------------------------------------------
 
 /**
- * Creates a new Circle from a diameter.
+ * Get the playback time in seconds and calculate and split in a nice format.
  *
- * @param {number} timeInSeconds The desired diameter of the circle.
- * @return {dict} The new Circle object.
+ * @param {number} timeInSeconds The current playback time.
+ * @return {dict} The formatted time in three parts (hour, minute, second).
  */
-function getFromatTime (timeInSeconds) {
+function getFormatTime (timeInSeconds) {
     const fullTime = {}
 
     const hours = Math.floor(timeInSeconds / 3600)
@@ -85,6 +104,12 @@ function getFromatTime (timeInSeconds) {
     return fullTime
 }
 
+/**
+ * Makes a time number pretty - prepend 0 if number is just one digit.
+ *
+ * @param {number} number Time value you want make pretty
+ * @return {number} The pretty number
+ */
 function getPrettyTime (number) {
     return ((number < 10) ? '0' + number : number)
 }
