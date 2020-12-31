@@ -78,7 +78,7 @@
 
         <div id="searchFragment">
             <div class="input-group input-group-sm mb-3">
-                <input v-model="message" type="text" class="form-control" placeholder="Search term" aria-label="Search term" aria-describedby="button-addon">
+                <input @keyup.enter="calliTunes" v-on:input="calliTunes" v-model="message" type="text" class="form-control" placeholder="Search term" aria-label="Search term" aria-describedby="button-addon">
                 <button v-on:click="calliTunes" class="btn btn-warning" type="button" id="button-addon">Search iTunes</button>
             </div>
             <span>
