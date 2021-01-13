@@ -11,11 +11,27 @@ function initPlayback (episodeUrl) {
     player.load()
 }
 
+function togglePlayPause () {
+    const playPauseBtn = document.getElementById('playerPlayPause')
+    const svgLink = playPauseBtn.getElementsByTagName('use')[0]
+
+    if (playPauseBtn.getAttribute('mode') === 'playing') {
+        startPlayback()
+    } else {
+        pausePlayback()
+    }
+}
+
 /**
  * Start the player.
  */
 function startPlayback () {
     const player = document.getElementById('player')
+    const playPauseBtn = document.getElementById('playerPlayPause')
+    const svgLink = playPauseBtn.getElementsByTagName('use')[0]
+
+    playPauseBtn.setAttribute('mode', 'paused')
+    svgLink.setAttribute('xlink:href', './node_modules/bootstrap-icons/bootstrap-icons.svg#pause-circle')
 
     player.play()
     player.addEventListener('timeupdate', updateProgress, false)
@@ -26,6 +42,11 @@ function startPlayback () {
  */
 function pausePlayback () {
     const player = document.getElementById('player')
+    const playPauseBtn = document.getElementById('playerPlayPause')
+    const svgLink = playPauseBtn.getElementsByTagName('use')[0]
+
+    playPauseBtn.setAttribute('mode', 'playing')
+    svgLink.setAttribute('xlink:href', './node_modules/bootstrap-icons/bootstrap-icons.svg#play-circle')
 
     player.pause()
 }
