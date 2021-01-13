@@ -30,18 +30,14 @@
                     src="img/podcast.png"
                     class="rounded shadow-sm"
                     style="width: 50px;">
-                <svg onclick="startPlayback()" style="cursor: pointer; position: absolute; left: 12px; top: 12px;" class="bi text-white" width="42" height="42"
+                <svg id="playerPlayPause" onclick="togglePlayPause()" mode="unset" style="cursor: pointer; position: absolute; left: 12px; top: 12px;" class="bi text-white" width="42" height="42"
                     fill="currentColor">
                     <use xlink:href="./node_modules/bootstrap-icons/bootstrap-icons.svg#play-circle" />
                 </svg>
-                <svg onclick="pausePlayback()" style="cursor: pointer;" class="bi text-secondary" width="24" height="24"
-                    fill="currentColor">
-                    <use xlink:href="./node_modules/bootstrap-icons/bootstrap-icons.svg#pause-circle" />
-                </svg>
             </div>
 
-            <div class="col p-2">
-                <div id="playerCollectionName" class="text-white"></div>
+            <div class="col p-2 border-end border-secondary">
+                <div id="playerCollectionName" class="text-white">No Podcast selected</div>
                 <small id="playerTitle" class="text-white text-muted font-monospace">No episode selected</small>
                 <div class="row">
                     <div class="col my-auto">
@@ -57,7 +53,7 @@
                             ></div>
                         </div>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <small id="playerPlaybackTime" class="text-muted">
                             00:00.00
                         </small>
@@ -65,7 +61,7 @@
                 </div>
             </div>
 
-            <div id="navContainer" class="col-auto border-start border-secondary p-2 my-auto">
+            <div id="navContainer" class="col-auto p-2 my-auto">
                 <nav-item
                     v-for="item in items"
                     v-bind:icon="item"
@@ -80,15 +76,15 @@
 
         <div id="searchFragment">
             <div class="input-group input-group-sm mb-3">
-                <input 
-                    @keyup.enter="calliTunes" 
-                    v-on:input="calliTunes" 
-                    v-model="message" 
-                    type="text" 
-                    class="form-control" 
+                <input
+                    @keyup.enter="calliTunes"
+                    v-on:input="calliTunes"
+                    v-model="message"
+                    type="text"
+                    class="form-control"
                     style="outline: none;"
-                    placeholder="Search term" 
-                    aria-label="Search term" 
+                    placeholder="Search term"
+                    aria-label="Search term"
                     aria-describedby="button-addon">
                 <button v-on:click="calliTunes" class="btn btn-warning" type="button" id="button-addon">Search iTunes</button>
             </div>
