@@ -2,6 +2,7 @@ const { app, BrowserWindow } = require('electron')
 
 const appLock = app.requestSingleInstanceLock()
 let win = null
+
 function createWindow () {
     win = new BrowserWindow({
         width: 800,
